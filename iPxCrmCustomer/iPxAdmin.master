@@ -1,0 +1,385 @@
+﻿<%@ Master Language="VB" CodeFile="iPxAdmin.master.vb" Inherits="iPXADMIN_iPxAdmin" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin</title>
+<link rel="shortcut icon" href="../../images/logo/logo P.png">
+
+<script src="../assets/js/jquery.js" type="text/javascript"></script>
+
+<script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
+
+
+<link href="../assets/css/bootstrap.css" rel="stylesheet" />
+<link href="../assets/css/font-awesome.css" rel="stylesheet" />
+<link href="../assets/css/custom.css" rel="stylesheet" />
+<link href="../assets/css/main.css" rel="stylesheet" />
+<link href="../assets/css/simple-sidebar.css" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/css/bootstrap.min.css"> 
+
+
+
+
+
+
+<script type="text/javascript">
+    function openModal() {
+        $('#myModal').modal('show');
+    }
+</script>
+
+<script type="text/javascript">
+    function openAlret() {
+        $('#showAlret').show();
+        $("#showAlret").fadeTo(2000, 1000).slideUp(1000, function () {
+            $("#showAlret").slideUp(1000);
+        });
+    }
+    function hideModalAdd() {
+        $('#login-modal').modal('hide');
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
+    }
+    function showModalAdd() {
+        $('#login-modal').modal('show');
+    }
+</script>
+
+<script type="text/javascript">
+    function closeAlret() {
+        $('#showAlret').hide();
+    }
+</script>
+
+    
+<script type="text/javascript">
+    function hideDisplayBlock() {
+        $('#myModal').modal('hide');
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
+    }
+</script>
+    <style type="text/css">
+
+        .pagination-ys {
+    /*display: inline-block;*/
+    padding-left: 0;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+
+.pagination-ys table > tbody > tr > td {
+    display: inline;
+}
+
+.pagination-ys table > tbody > tr > td > a,
+.pagination-ys table > tbody > tr > td > span {
+    position: relative;
+    float: left;
+    padding: 8px 12px;
+    line-height: 1.42857143;
+    text-decoration: none;
+    color: #0e9769;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    margin-left: -1px;
+}
+
+.pagination-ys table > tbody > tr > td > span {
+    position: relative;
+    float: left;
+    padding: 8px 12px;
+    line-height: 1.42857143;
+    text-decoration: none;    
+    margin-left: -1px;
+    z-index: 2;
+    color: #aea79f;
+    background-color: #f5f5f5;
+    border-color: #dddddd;
+    cursor: default;
+}
+
+.pagination-ys table > tbody > tr > td:first-child > a,
+.pagination-ys table > tbody > tr > td:first-child > span {
+    margin-left: 0;
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+}
+
+.pagination-ys table > tbody > tr > td:last-child > a,
+.pagination-ys table > tbody > tr > td:last-child > span {
+    border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.pagination-ys table > tbody > tr > td > a:hover,
+.pagination-ys table > tbody > tr > td > span:hover,
+.pagination-ys table > tbody > tr > td > a:focus,
+.pagination-ys table > tbody > tr > td > span:focus {
+    color: #0e9769;
+    background-color: #eeeeee;
+    border-color: #dddddd;
+}
+    </style>
+
+
+   <style type="text/css">
+        body
+        {
+            margin: 0;
+            padding: 0;
+            font-family: Arial;
+        }
+        .modalprogress
+        {
+            position: fixed;
+            z-index: 999;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            background-color: White;
+            filter: alpha(opacity=60);
+            opacity: 0.6;
+            -moz-opacity: 0.8;
+        }
+        .centerprogress
+        {
+            z-index: 1000;
+            margin: 300px auto;
+            padding: 10px;
+            width: 130px;
+            background-color: White;
+            border-radius: 10px;
+            filter: alpha(opacity=100);
+            opacity: 1;
+            -moz-opacity: 1;
+        }
+        .center img
+        {
+        }
+          .alert {
+            display: block;
+        }    
+        #header
+        {
+            top:0%;
+            height: 15%;
+            width :78%;
+            left :21%;
+            position:fixed ;
+            z-index:999;
+            overflow:auto ; 
+        }
+        #content
+        {
+            margin-top:105px;
+            overflow:auto;
+            width :90%;
+            left :21%;
+            z-index:999;
+        }
+        #footer
+        {
+            top:92%;
+            height: 8%;
+            width :78%;
+            left :21%;
+            position:fixed ;
+            z-index:999;
+            overflow:auto ; 
+        }
+        .dot {
+            height: 25px;
+            width: 25px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        /* Make the badge float in the top right corner of the button */
+        .button__badge {
+          background-color: #1E90FF;
+          border-radius: 5px;
+          color: white; 
+          padding: 1px 3px;
+          font-size: 11px;
+          
+
+        }
+
+
+    </style>
+
+  
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body >
+<div id="header" >
+          <%--<img src="../assets/img/blueTriangle-bgr.png" style="margin-right"/>--%>
+           <asp:ContentPlaceHolder ID="ContentPlaceHolder4" runat="server">
+       <div class="pageheader">
+    <%--<i class="fa fa-drivers-license-o"></i>--%> 
+           
+    <h2>
+        <asp:Label ID="lblMasterTitle" runat="server" Text="Alcor Loyalty Management" Font-Bold="true" Font-Size="Large"></asp:Label>        
+    </h2>
+    
+    <div class="breadcrumb-wrapper hidden-xs"> <span class="label"></span>
+    <ol class="breadcrumb">
+     <%-- <li> <a href="signin.aspx"> --%>
+       <li>  
+           <a href="signin.aspx">      
+      	<asp:Label ID="Label20" runat="server" Text=" Logout " meta:resourcekey="Label20Resource1"></asp:Label> </a>            
+       </li>
+      <li class="active"> 
+      <asp:Label ID="lblUser" runat="server" 
+  Text=" User Operator " meta:resourcekey="Label22Resource1"></asp:Label>
+       </li>
+        <li>       
+      	<asp:Label ID="Label1" runat="server" Text="txtversion">v.B.1.4.9</asp:Label>           
+       </li>
+
+    </ol>
+  </div>
+
+</div>
+          </asp:ContentPlaceHolder>
+</div>
+<form id="form1" runat="server">
+ <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+     <ContentTemplate>
+         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+            <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel1">
+        <ProgressTemplate>
+            <div class="modalprogress">
+                <div class="centerprogress">
+                    <img alt="" src="../assets/images/progress/loader.gif" />
+                </div>
+            </div>
+        </ProgressTemplate>
+    </asp:UpdateProgress>
+
+  
+<nav class="navbar navbar-default sidebar navbar-fixed-top" role="navigation" data-spy="affix">
+<div class="container-fluid">
+	<div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>    
+                          <a href="home.aspx" class="navbar-brand"  href="#" ><img src="../assets/img/Alcor-cloud.png"  /> </a> 
+  
+    </div>
+	<div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
+		<ul class="nav navbar-nav">
+			<li>
+				<a href="setupUser.aspx" class="text-primary">Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home "></span></a>
+			</li>
+
+            <li class="dropdown">
+				<a href="" class="dropdown-toggle" data-toggle="dropdown">Transaction<span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity fa fa-credit-card "></span> <span class="button__badge"><asp:Label ID="lbltotalTrans" runat="server" Text="0"></asp:Label></span></a>
+				<ul class="dropdown-menu forAnimate" role="menu">
+					
+					<li>
+						<a href="viewMemberTransaction.aspx">Point Reward <span class="button__badge"><asp:Label ID="lblpointreward" runat="server" Text="0"></asp:Label></span></a>
+					</li>
+                    <li>
+						<a href="viewMemberRedeem.aspx">Point Redeemption <span class="button__badge"><asp:Label ID="lblredeem" runat="server" Text="0"></asp:Label></span> </a>
+		            </li>
+                    <li>
+						<a href="viewRequestRed.aspx">Request Redeem <span class="button__badge"><asp:Label ID="lblTotalRequest" runat="server" Text="0"></asp:Label></span></a>
+		            </li>
+		            <div class="button">
+
+
+
+				</ul>
+			</li>
+			
+			<li>
+				<a href="viewApproved.aspx">Delivery Status<span style="font-size:16px;" class="pull-right hidden-xs showopacity fa fa-truck "></span></a>
+			</li>
+
+      
+            <li>
+				<a href="../iPxReport/iPxReportList.aspx">Report & Analyst<span style="font-size:16px;" class="pull-right hidden-xs showopacity fa fa-line-chart "></span></a>
+			</li>
+     <li>
+				<a href="Broadcast.aspx">Broadcast<span style="font-size:16px;" class="pull-right hidden-xs showopacity fa fa-paper-plane "></span></a>
+			</li>
+            <li class="dropdown">
+				<a href="" class="dropdown-toggle" data-toggle="dropdown">Membership Profile<span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity fa fa-group "></span></a>
+				<ul class="dropdown-menu forAnimate" role="menu">
+                       <%-- <li>
+						<a href="Member.aspx">Registration Member</a>
+					</li>--%>
+					<li>
+						<a href="viewMember.aspx">Member</a>
+					</li>
+                    <li>
+						<a href="viewGuestGeneral.aspx">Prospect Customer</a>
+					</li>
+					
+				</ul>
+			</li>
+
+            <li class="dropdown">
+				<a href="" class="dropdown-toggle" data-toggle="dropdown">Configuration<span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity fa fa-cogs "></span></a>
+				<ul class="dropdown-menu forAnimate" role="menu">
+                    <li><a href="viewLoyaltyHDR.aspx">Loyalty Program</a></li>
+                    <li><a href="viewLoyaltyBnf.aspx">Benefit & Reward</a></li>
+                    <li><a href="viewdeptcode.aspx">Revenue Group</a></li>
+                    <li><a href="viewprofilestatus.aspx">Profile Status</a></li>
+                     <li><a href="viewJobPost.aspx">Job Position</a></li>
+                    <li><a href="viewSales.aspx">Sales</a></li>
+                    <li><a href="viewdelivery.aspx">Delivery Profile</a></li>
+					<li><a href="viewUserAcc.aspx">User Access</a></li>
+                    
+				</ul>
+			</li>
+
+                        <li>
+				<a href="signin.aspx">Logout<span style="font-size:16px;" class="pull-right hidden-xs showopacity fa fa-sign-out "></span></a>
+			</li>
+		</ul>
+	</div>
+</div>
+</nav>
+
+ <div class="" id="page-wrapper">
+      
+                <div class="row">
+                    <div class="col-lg-12">
+                      <div id="content" class="container" >
+                        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </div>
+                   </div>
+                </div>
+                
+                <div id="footer" class="container" >
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+
+                <div class="container">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder3" runat="server"></asp:ContentPlaceHolder>
+                </div>
+     
+</div>
+
+            </ContentTemplate>
+    </asp:UpdatePanel>
+</form>
+       
+ 
+</body>
+  
+</html>

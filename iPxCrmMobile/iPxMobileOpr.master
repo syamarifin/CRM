@@ -1,0 +1,426 @@
+﻿<%@ Master Language="VB" CodeFile="iPxMobileOpr.master.vb" Inherits="iPxMobile_iPxMobileOpr" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+   <title>Alcor</title> 
+<!-- For-Mobile-Apps-and-Meta-Tags -->
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Fortune Estates Widget Responsive, Login Form Web Template, Flat Pricing Tables, Flat Drop-Downs, Sign-Up Web Templates, Flat Web Templates, Login Sign-up Responsive Web Template, SmartPhone Compatible Web Template, Free Web Designs for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- //For-Mobile-Apps-and-Meta-Tags -->
+<!-- Custom Theme files -->
+
+
+
+<link rel="stylesheet" href="../assets/css/main.css" type="text/css" media="all" /> 
+<link rel="stylesheet" href="../assets/css/bootstrap.css" type="text/css" media="all" /> 
+<link rel="stylesheet" href="../assets/css/me/style.css" type="text/css" media="all" /> 
+<link rel="stylesheet" href="../assets/css/me/ken-burns.css" type="text/css" media="all" /> 
+<link rel="stylesheet" href="../assets/css/font-awesome.css" type="text/css" media="all" /> 
+
+<script src="../assets/js/jquery.js" type="text/javascript"></script>
+
+<script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="../assets/js/jquery-1.10.2.js" type="text/javascript"></script>
+
+
+
+
+
+
+   
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+
+
+
+<script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
+<!-- //Custom Theme files -->
+<!-- js -->
+<script src="../assets/js/jquery-2.2.3.min.js"></script> 
+<!-- //js -->
+<!-- pop-up-box -->
+<script src="../assets/js/jquery.magnific-popup.js" type="text/javascript"></script>
+	    <script>
+	        $(document).ready(function () {
+	            $('.popup-top-anim').magnificPopup({
+	                type: 'inline',
+	                fixedContentPos: false,
+	                fixedBgPos: true,
+	                overflowY: 'auto',
+	                closeBtnInside: true,
+	                preloader: false,
+	                midClick: true,
+	                removalDelay: 300,
+	                mainClass: 'my-mfp-zoom-in'
+	            });
+	        });
+	    </script>
+	    <script type="text/javascript">
+	        function hideModalDelete() {
+	            $('#modalHapus').modal('hide');
+	            $('body').removeClass('modal-open');
+	            $('.modal-backdrop').remove();
+	        }
+	        function showModalDelete() {
+	            $('#modalHapus').modal('show');
+	        }
+
+	        function hideNotif() {
+	            $("#notif").hide();
+	            $("#nonNotif").show();
+	        }
+	        function showNotif() {
+	            $("#notif").show();
+	            $("#nonNotif").hide();
+	        }
+		</script>
+        <style type="text/css">
+        #content
+        {
+            margin-top:5px;
+            overflow:auto;
+            width :100%;
+            z-index:999;
+        }
+        .pagination-ys {
+    /*display: inline-block;*/
+    padding-left: 0;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+
+.pagination-ys table > tbody > tr > td {
+    display: inline;
+}
+
+.pagination-ys table > tbody > tr > td > a,
+.pagination-ys table > tbody > tr > td > span {
+    position: relative;
+    float: left;
+    padding: 8px 12px;
+    line-height: 1.42857143;
+    text-decoration: none;
+    color: #0e9769;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    margin-left: -1px;
+}
+
+.pagination-ys table > tbody > tr > td > span {
+    position: relative;
+    float: left;
+    padding: 8px 12px;
+    line-height: 1.42857143;
+    text-decoration: none;    
+    margin-left: -1px;
+    z-index: 2;
+    color: #aea79f;
+    background-color: #f5f5f5;
+    border-color: #dddddd;
+    cursor: default;
+}
+
+.pagination-ys table > tbody > tr > td:first-child > a,
+.pagination-ys table > tbody > tr > td:first-child > span {
+    margin-left: 0;
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+}
+
+.pagination-ys table > tbody > tr > td:last-child > a,
+.pagination-ys table > tbody > tr > td:last-child > span {
+    border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.pagination-ys table > tbody > tr > td > a:hover,
+.pagination-ys table > tbody > tr > td > span:hover,
+.pagination-ys table > tbody > tr > td > a:focus,
+.pagination-ys table > tbody > tr > td > span:focus {
+    color: #0e9769;
+    background-color: #eeeeee;
+    border-color: #dddddd;
+}
+    </style>
+
+       <style>
+       .visible {
+          visibility: visible;
+        }
+        .invisible {
+          visibility: hidden;
+        }    
+       </style>
+       <style type="text/css">
+           .limit-text {
+  /*display: block;
+  width: 300px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;*/
+}
+     .Footer-fix{
+         background-color:#25a79f;
+     }
+     .btn-default{
+         background-color:#25a79f;
+         color:#fff;
+             border-radius: 0px;
+     }
+           .btn-circle{width:35px;height:35px;text-align:center;padding:6px 0;font-size:14px;border-radius:100px}
+
+            .lock-wrapper1 img{border:none}
+  .lock-wrapper1 h4{text-align:center;color:#25a79f;font-size:20px;margin:10px 0}
+  .lock-wrapper1 
+  .locked{position:absolute;line-height:36px;border-radius:50%;-webkit-border-radius:50%;display:inline-block;color:#fff;text-align:center;background:#25a79f;border:4px solid #fff;font-size:22px}
+  .lock-wrapper1 input,
+  .lock-wrapper1 input:focus{width:100%!important;height:34px;float:left;margin-bottom:15px}
+
+ .lock-wrapper1 img{border:none}
+
+ 
+
+.transparent {
+  opacity: 0.9;
+    filter: alpha(opacity=90); 
+}
+       .vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+
+
+  align-items: center;
+}
+         .modalprogress
+        {
+            position: fixed;
+            z-index: 999;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            background-color: White;
+            filter: alpha(opacity=60);
+            opacity: 0.6;
+            -moz-opacity: 0.8;
+        }
+        .centerprogress
+        {
+            z-index: 1000;
+            margin: 300px auto;
+            padding: 10px;
+            width: 130px;
+            background-color: White;
+            border-radius: 10px;
+            filter: alpha(opacity=100);
+            opacity: 1;
+            -moz-opacity: 1;
+        }
+        .center img
+        {
+          
+        }
+          .alert {
+            display: block;
+        }
+              .box-shadow-bottom{
+	-webkit-box-shadow: 0 8px 6px -6px #777;
+	   -moz-box-shadow: 0 8px 6px -6px #777;
+	        box-shadow: 0 8px 6px -6px #777;
+}
+.box-shadow-top
+{
+
+    
+    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+       -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+            box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+    </style>
+<!--//pop-up-box -->
+<!-- web-fonts -->  
+  <%--  <link href='//fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>--%>
+<!-- //web-fonts -->
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+
+	<div class="agile-main"> 
+		<div class="menu-wrap" id="style-1"> 
+			<nav class="top-nav">
+				<ul class="icon-list">
+				     <li><a class="active" href="#" ></a></li>
+                     <li><a class="active" href="#" ></a></li>
+                     <li><a class="active" href="#" ></a></li>
+                    <li><a class="active" href="#" >
+                        <asp:Image ID="imgProfile" runat="server" BackColor="White" Height="80px" Width="80px" CssClass="img-circle" ImageUrl="../assets/images/icon/user.png" />  
+                        <br />
+                        <h5><small><asp:Label ID="lblBusinessName" runat="server" CssClass="limit-text text-bold text-white" Text=""></asp:Label> </small> </h5>
+                        </a></li>
+
+					<li><a class="" href="iPxCrmHomeMobile.aspx"><i class="fa fa-home"></i> Home </a></li>
+					<li class="" ><a href="iPxTicketCustomer.aspx"><i class="fa fa-credit-card"></i> Support  </a></li>
+					<li class="" ><a href="iPxCrmContact.aspx"><i class="fa fa-cogs"></i> Option  </a></li>
+                    <%--<li class="" ><a href="history.aspx"><i class="fa fa-history"></i>  History </a></li>
+                    <li class="" ><a href="RedeemList.aspx"><i class="fa fa-navicon"></i>  List Redeemtion </a></li>--%>
+					
+			
+				
+                    <li><a runat="server" id="logout" ><i class="fa fa-sign-out"></i> Logout </a></li>
+                    <%--<li><a href="#small-dialog" class="sign-in popup-top-anim"><i class="glyphicon glyphicon-user"></i> login</a></li> --%>                                            
+<%--					<li><a href="#small-dialog1" class="sign-in popup-top-anim"><i class="glyphicon glyphicon-edit"></i> Sign Up</a></li>--%>
+				</ul>
+			</nav>
+			<button class="close-button" id="close-button">C</button>
+			<div style="position:absolute; bottom:0; width:100%; height:25px; text-align:center">
+			    <a href="releaseversion.aspx">
+			        <asp:Label ID="lbVersi" runat="server" Text="Label" Font-Size="Large" ForeColor="White"></asp:Label>
+			    </a>
+			</div>
+		</div> 
+		<div class="content-wrap">
+			<div class="header navbar-fixed-top box-shadow-bottom"> 
+ 
+				<div class="menu-icon">   
+					<button class="menu-button" id="open-button">O</button>
+				</div>
+				<div class="text-right">
+				    <asp:Label ID="lbInfoUser" runat="server" Text="Label" ForeColor="White" Font-Size="Medium"></asp:Label>
+					<a href="iPxCrmProfile.aspx"><img src="../assets/img/find_user.png" height="30px" /></a>
+				</div>
+				<div class="login">
+					<%--<a href="#small-dialog" class="sign-in popup-top-anim"><span class="glyphicon glyphicon-user"></span></a> --%>
+					<!-- modal -->
+					<div id="small-dialog" class="mfp-hide">
+						<div class="login-modal"> 	
+							<div class="booking-info">
+								<h3><a href="#">Alcor POS</a></h3>
+							</div>
+							<div class="login-form">
+								<form action="#" method="post">
+									<div class="styled-input">
+										<input type="text" name="Username"  />
+										<label>Username</label>
+										<span></span>
+									</div>
+									<div class="styled-input">
+										<input type="password" name="Password"  > 
+										<label>Password</label>
+										<span></span>
+									</div> 
+									<div class="wthree-text"> 
+										<ul> 
+											<li>
+												<input type="checkbox" id="brand" value="">
+												<label for="brand"><span></span> Remember me ?</label>  
+											</li>
+											<li> <a href="#">Forgot password?</a> </li>
+										</ul>
+										<div class="clear"> </div>
+									</div> 
+									<input type="submit" value="Sign In">		
+								</form>
+								<p>Don’t have an account ?<a href="#small-dialog1" class="sign-in popup-top-anim"> Sign Up</a></p>
+							</div> 
+						</div>
+					</div>
+					<!-- //modal --> 
+					<!-- modal-two -->
+					<div id="small-dialog1" class="mfp-hide">
+						<div class="login-modal">  
+							<div class="booking-info">
+								<h3><a href="#">Alcor POS</a></h3>
+							</div>
+							<div class="login-form signup-form">
+								<form action="#" method="post">
+									<div class="styled-input">
+										<input type="text" name="Username"  />
+										<label>Username</label>
+										<span></span>
+									</div>
+									<div class="styled-input">
+										<input type="text" name="email"  />
+										<label>Email</label>
+										<span></span>
+									</div>
+									<div class="styled-input">
+										<input type="password" name="Password"  > 
+										<label>Password</label>
+										<span></span>
+									</div>  
+									<div class="wthree-text"> 
+										<input type="checkbox" id="brand1" value="">
+										<label for="brand1"><span></span>I accept the terms of use</label> 
+									</div>
+									<input type="submit" value="Sign Up">		
+								</form> 
+							</div> 
+						</div>
+					</div>
+					<!-- //modal-two --> 
+				</div> 
+				<div class="clearfix"> </div>
+			</div>
+			<div id="content">
+			<form id="Form1" runat=server>
+                       <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+     <ContentTemplate>
+            <asp:ScriptManager ID="ScriptManager1" runat="server" EnableViewState="False" 
+                LoadScriptsBeforeUI="False">
+            </asp:ScriptManager>
+            <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel1">
+        <ProgressTemplate>
+            <div class="modalprogress">
+                <div class="centerprogress">
+                    <img alt="" src="../images/ProgressBar/loader.gif" />
+                </div>
+            </div>
+        </ProgressTemplate>
+    </asp:UpdateProgress>
+            <!--      content-->
+              <div style="height:100%;">
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+              </div>
+         </ContentTemplate>
+                           </asp:UpdatePanel>
+<%--   <div class="Footer-fix bg-warning" > 
+			
+				
+						<p class="text-center"> Powered By PYXIS ULTIMATE SOLUTION.PT</p>
+       <p class="text-center">&copy; 2017 Alcor POS .</p>
+					
+				</div> --%>
+				    </form>
+			</div>
+		</div>
+	</div> 
+	<!-- menu-js -->
+	<script src="../assets/js/classie.js"></script>
+	<script src="../assets/js/main.js"></script>
+	<!-- //menu-js -->
+	<!-- nice scroll-js -->
+	<script src="../assets/js/jquery.nicescroll.min.js"></script> 
+	<script>
+	    $(document).ready(function () {
+
+	        var nice = $("html").niceScroll();  // The document page (body)
+
+	        $("#div1").html($("#div1").html() + ' ' + nice.version);
+
+	        $("#boxscroll").niceScroll({ cursorborder: "", cursorcolor: "#00F", boxzoom: true }); // First scrollable DIV
+	    });
+	</script>
+	<!-- //nice scroll-js -->
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../assets/js/bootstrap.js"></script>
+
+</body>
+</html>

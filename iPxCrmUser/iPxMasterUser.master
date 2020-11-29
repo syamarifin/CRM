@@ -1,0 +1,643 @@
+﻿<%@ Master Language="VB" CodeFile="iPxMasterUser.master.vb" Inherits="iPxCrmUser_iPxMasterUser" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Untitled Page</title>
+<link rel="shortcut icon" href="../../images/logo/logo P.png">
+
+<script src="../assets/js/jquery.js" type="text/javascript"></script>
+
+<script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
+
+
+<link href="../assets/css/bootstrap.css" rel="stylesheet" />
+<link href="../assets/css/font-awesome.css" rel="stylesheet" />
+<link href="../assets/css/custom.css" rel="stylesheet" />
+<link href="../assets/css/main.css" rel="stylesheet" />
+<link href="../assets/css/simple-sidebar.css" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+<script src="../assets/BootStrapDateTimePickerExample/DatePicker/bootstrap-datepicker.js" type="text/javascript"></script>
+<link href="../assets/BootStrapDateTimePickerExample/DatePicker/bootstrap-datepicker.css" rel="stylesheet" />
+
+
+<script type="text/javascript">
+    var myVar = setInterval(function() { ShowCurrentTime() }, 1000);
+    var notiftiket = '';
+    function ShowCurrentTime() {
+        $.ajax({
+            type: "POST",
+            url: "iPxCrmHome.aspx/notifTotalTicketNew",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: OnSuccessNotifNew,
+            failure: function(responseNotifNew) {
+                alert(responseNotifNew.d);
+            }
+        });
+        $.ajax({
+            type: "POST",
+            url: "iPxCrmHome.aspx/notifTotalTicketFollow",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: OnSuccessNotifFollow,
+            failure: function(responseNotifFollow) {
+                alert(responseNotifFollow.d);
+            }
+        });
+        $.ajax({
+            type: "POST",
+            url: "iPxCrmHome.aspx/notifTotalTicketDone",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: OnSuccessNotifDone,
+            failure: function(responseNotifDone) {
+                alert(responseNotifDone.d);
+            }
+        });
+    }
+
+    function OnSuccessNotifNew(responseNotifNew) {
+        data = JSON.parse(responseNotifNew.d);
+        var unread = '';
+        $(data).each(function(key, value) {
+            unread += value.jumlahTiket;
+        });
+        notiftiket = 0;
+        notiftiket = (parseInt(notiftiket) + parseInt(unread));
+        $('#notifNewTicket').html(unread);
+        if (unread == '0') {
+            $('#notifNewTicket').css('display', 'none');
+        } else {
+            $('#notifNewTicket').css('display', 'inline-block');
+        }
+    }
+
+    function OnSuccessNotifFollow(responseNotifFollow) {
+        data = JSON.parse(responseNotifFollow.d);
+        var unread = '';
+        $(data).each(function(key, value) {
+            unread += value.jumlahFollow;
+        });
+        notiftiket = (parseInt(notiftiket) + parseInt(unread));
+        $('#notifFollow').html(unread);
+        if (unread == '0') {
+            $('#notifFollow').css('display', 'none');
+        } else {
+            $('#notifFollow').css('display', 'inline-block');
+        }
+    }
+
+    function OnSuccessNotifDone(responseNotifDone) {
+        data = JSON.parse(responseNotifDone.d);
+        var unread = '';
+        $(data).each(function(key, value) {
+            unread += value.jumlahFollow;
+        });
+        notiftiket = (parseInt(notiftiket) + parseInt(unread));
+        $('#notifDone').html(unread);
+        if (unread == '0') {
+            $('#notifDone').css('display', 'none');
+        } else {
+            $('#notifDone').css('display', 'inline-block');
+        }
+        $('#notifTicket').html(notiftiket);
+    }
+</script>
+<script type="text/javascript">
+    function openModal() {
+        $('#myModal').modal('show');
+    }
+</script>
+<script>
+    function hanyaAngka(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57) && (charCode < 45 || charCode > 45))
+
+            return false;
+        return true;
+    }
+    function hanyaHuruf(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode > 31 && (charCode < 32 || charCode > 32) && (charCode < 97 || charCode > 122) && (charCode < 65 || charCode > 90))
+
+            return false;
+        return true;
+    }
+</script>
+
+<script type="text/javascript">
+    function openAlret() {
+        $('#showAlret').show();
+        $("#showAlret").fadeTo(2000, 1000).slideUp(1000, function() {
+            $("#showAlret").slideUp(1000);
+        });
+    }
+    function hideModalAdd() {
+        $('#login-modal').modal('hide');
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
+    }
+    function showModalAdd() {
+        $('#login-modal').modal({ backdrop: 'static',
+            keyboard: false
+        }, 'show');
+    }
+    function hidesave() {
+        $('#modal_save').modal('hide');
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
+    }
+    function showsave() {
+        $('#modal_save').modal({ backdrop: 'static',
+            keyboard: false
+        }, 'show');
+    }
+    function hideModalSub() {
+        $('#submenu-modal').modal('hide');
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
+    }
+    function showModalSub() {
+        $('#submenu-modal').modal({ backdrop: 'static',
+            keyboard: false
+        }, 'show');
+    }
+    function hideModalFormSub() {
+        $('#formsub-modal').modal('hide');
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
+    }
+    function showModalFormSub() {
+        $('#formsub-modal').modal({ backdrop: 'static',
+            keyboard: false
+        }, 'show');
+    }
+    function hideModalDelete() {
+        $('#modalHapus').modal('hide');
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
+    }
+    function showModalDelete() {
+        $('#modalHapus').modal({ backdrop: 'static',
+            keyboard: false
+        }, 'show');
+    }
+    function hideModalDeleteProduct() {
+        $('#modalHapusProduct').modal('hide');
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
+    }
+    function showModalDeleteProduct() {
+        $('#modalHapusProduct').modal({ backdrop: 'static',
+            keyboard: false
+        }, 'show');
+    }
+    function hideModalDeleteMenu() {
+        $('#modalHapusMenu').modal('hide');
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
+    }
+    function showModalDeleteMenu() {
+        $('#modalHapusMenu').modal({ backdrop: 'static',
+            keyboard: false
+        }, 'show');
+    }
+    function hideFormMenu() {
+        $('#formMenu-modal').modal('hide');
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
+    }
+    function showFormMenu() {
+        $('#formMenu-modal').modal({ backdrop: 'static',
+            keyboard: false
+        }, 'show');
+    }
+    function hideFormSOP() {
+        $('#FormSOP-modal').modal('hide');
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
+    }
+    function showFormSOP() {
+        $('#FormSOP-modal').modal({ backdrop: 'static',
+            keyboard: false
+        }, 'show');
+    }
+    function menuShow() {
+        $("#menuProduct").show();
+    }
+    function menuHide() {
+        $("#menuProduct").hide();
+    }
+    function subMenuShow() {
+        $("#PanelSub").show();
+    }
+    function subMenuHide() {
+        $("#PanelSub").hide();
+    }
+    function SOPShow() {
+        $("#PanelSOP").show();
+    }
+    function SOPHide() {
+        $("#PanelSOP").hide();
+    }
+    function cobaPanel() {
+        $("#panelCoba").hide();
+    }
+    function cobaPanel1() {
+        $("#panelCoba").show();
+    }
+    function date() {
+        $(document).ready(function() {
+            $(".datepicker").datepicker({ format: 'dd/mm/yyyy', autoclose: true, todayBtn: 'linked' })
+        });
+    }
+    function dateQuery() {
+        $(document).ready(function() {
+            $(".datepicker").datepicker({ format: 'dd-mm-yyyy', autoclose: true, todayBtn: 'linked' })
+        });
+    }
+    function hidePanelNew() {
+        $("#new").hide();
+    }
+    function showPanelNew() {
+        $("#new").show();
+    }
+    function hidePanelProses() {
+        $("#proses").hide();
+    }
+    function showPanelProses() {
+        $("#proses").show();
+    }
+    function hidePanelDone() {
+        $("#done").hide();
+    }
+    function showPanelDone() {
+        $("#done").show();
+    }
+    function hidePanelFollow() {
+        $("#follow").hide();
+    }
+    function showPanelFollow() {
+        $("#follow").show();
+    }
+    function hideNotifTiket() {
+        $("#notifTicket").hide();
+    }
+    function hideNotifNewTiket() {
+        $("#notifNewTicket").hide();
+    }
+    function hideNotifFollow() {
+        $("#notifFollow").hide();
+    }
+    function hideNotifDone() {
+        $("#notifDone").hide();
+    }
+</script>
+
+<script type="text/javascript">
+    function closeAlret() {
+        $('#showAlret').hide();
+    }
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('.dropdown-submenu a.test').on("click", function(e) {
+            $(this).next('ul').toggle();
+            e.stopPropagation();
+            e.preventDefault();
+        });
+    });
+</script>
+    
+<script type="text/javascript">
+    function hideDisplayBlock() {
+        $('#myModal').modal('hide');
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
+    }
+</script>
+    <style type="text/css">
+
+        .pagination-ys {
+    /*display: inline-block;*/
+    padding-left: 0;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+
+.pagination-ys table > tbody > tr > td {
+    display: inline;
+}
+
+.pagination-ys table > tbody > tr > td > a,
+.pagination-ys table > tbody > tr > td > span {
+    position: relative;
+    float: left;
+    padding: 8px 12px;
+    line-height: 1.42857143;
+    text-decoration: none;
+    color: #0e9769;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    margin-left: -1px;
+}
+
+.pagination-ys table > tbody > tr > td > span {
+    position: relative;
+    float: left;
+    padding: 8px 12px;
+    line-height: 1.42857143;
+    text-decoration: none;    
+    margin-left: -1px;
+    z-index: 2;
+    color: #aea79f;
+    background-color: #f5f5f5;
+    border-color: #dddddd;
+    cursor: default;
+}
+
+.pagination-ys table > tbody > tr > td:first-child > a,
+.pagination-ys table > tbody > tr > td:first-child > span {
+    margin-left: 0;
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+}
+
+.pagination-ys table > tbody > tr > td:last-child > a,
+.pagination-ys table > tbody > tr > td:last-child > span {
+    border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.pagination-ys table > tbody > tr > td > a:hover,
+.pagination-ys table > tbody > tr > td > span:hover,
+.pagination-ys table > tbody > tr > td > a:focus,
+.pagination-ys table > tbody > tr > td > span:focus {
+    color: #0e9769;
+    background-color: #eeeeee;
+    border-color: #dddddd;
+}
+    </style>
+
+
+   <style type="text/css">
+        body
+        {
+            margin: 0;
+            padding: 0;
+            font-family: Arial;
+        }
+        .modal-full
+        {
+        	min-width: 95%;
+            margin: 5;
+        	}
+        .modalprogress
+        {
+            position: fixed;
+            z-index: 999;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            background-color: White;
+            filter: alpha(opacity=60);
+            opacity: 0.6;
+            -moz-opacity: 0.8;
+        }
+        .centerprogress
+        {
+            z-index: 1000;
+            margin: 300px auto;
+            padding: 10px;
+            width: 130px;
+            background-color: White;
+            border-radius: 10px;
+            filter: alpha(opacity=100);
+            opacity: 1;
+            -moz-opacity: 1;
+        }
+        .center img
+        {
+        }
+          .alert {
+            display: block;
+        }    
+        #header
+        {
+            top:0%;
+            height: 15%;
+            width :80%;
+            left :19%;
+            position:fixed ;
+            z-index:999;
+            <%--overflow:auto ; --%>
+        }
+        #content
+        {
+            margin-top:80px;
+            overflow:auto;
+            width :95%;
+            left :21%;
+            z-index:999;
+            margin-bottom:25px;
+            padding-bottom:45px;
+        }
+        #footer
+        {
+            top:92%;
+            height: 8%;
+            width :78%;
+            left :20%;
+            position:fixed ;
+            padding-top: 5px;
+            z-index:999;
+            background-color:white;
+            overflow:auto ; 
+        }
+        .dot {
+            height: 25px;
+            width: 25px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        /* Make the badge float in the top right corner of the button */
+        .button__badge {
+          background-color: #1E90FF;
+          border-radius: 5px;
+          color: white; 
+          padding: 1px 3px;
+          font-size: 11px;
+          
+
+        }
+
+        
+    </style>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div id="header" >
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder4" runat="server">
+        <div class="pageheader">           
+            <h2>
+                <asp:Label ID="lblMasterTitle" runat="server" Text="Customer Support" Font-Bold="true" Font-Size="Large"></asp:Label>        
+            </h2>
+            <div class="breadcrumb-wrapper hidden-xs"> <span class="label"></span>
+            <ol class="breadcrumb">
+                <li>  
+                    <%--<a href="../login.aspx">	<asp:Label ID="Label20" runat="server" Text=" Logout " meta:resourcekey="Label20Resource1"></asp:Label> </a>--%> 
+                    <asp:LinkButton ID="LinkButton1" runat="server"><asp:Label ID="Label20" runat="server" Text=" Logout " meta:resourcekey="Label20Resource1"></asp:Label></asp:LinkButton>           
+                </li>
+                <li class="active"> 
+                    <asp:Label ID="lblUser" runat="server" Text=" User Operator " meta:resourcekey="Label22Resource1"></asp:Label>
+                </li>
+                <li>       
+      	            <a href="releaseversion.aspx" >
+      	                <asp:Label ID="lbVersi" runat="server" Text="txtversion"></asp:Label>
+      	            </a>           
+                </li>
+            </ol>
+            </div>
+
+        </div>
+        </asp:ContentPlaceHolder>
+    </div>
+
+ <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+     <ContentTemplate>
+         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+            <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel1">
+        <ProgressTemplate>
+            <div class="modalprogress">
+                <div class="centerprogress">
+                    <img alt="" src="../assets/images/progress/loader.gif" />
+                </div>
+            </div>
+        </ProgressTemplate>
+    </asp:UpdateProgress>
+
+  
+    <nav class="navbar navbar-default sidebar navbar-fixed-top" role="navigation" data-spy="affix">
+<div class="container-fluid">
+	<div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>    
+      <a href="iPxCrmHome.aspx" class="navbar-brand"  style="margin-left:0px; padding-right:0px; padding-left:0px;" href="#" ><img src="../assets/img/logoCrm.png"  /> </a> 
+    </div>
+	<div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
+		<ul class="nav navbar-nav">
+			<li>
+				<a href="iPxCrmHome.aspx" class="text-primary">Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home "></span></a>
+			</li>
+            <li class="dropdown">
+				<a href="" class="dropdown-toggle" data-toggle="dropdown">Support<span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity fa fa-credit-card "></span> <span id="notifTicket" class="button__badge"></span></a>
+				<ul class="dropdown-menu forAnimate" role="menu">
+					<li>
+						<a href="iPxCrmNewtiket.aspx">New E-Ticket <span id="notifNewTicket" class="button__badge"></span> </a>
+		            </li>
+                    <li>
+						<a href="iPxCrmAssign.aspx">Follow Up <span id="notifFollow" class="button__badge"></span> </a>
+		            </li>
+                    <li>
+						<a href="iPxCrmDone.aspx">Done <span id="notifDone" class="button__badge"></span></a>
+		            </li>
+		            <div class="button">
+				</ul>
+			</li>
+			<%--<li class="dropdown">
+				<a href="" class="dropdown-toggle" data-toggle="dropdown">Sales Marketing<span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity fa fa-credit-card "></span> </a>
+				<ul class="dropdown-menu forAnimate" role="menu">
+					<li>
+						<a href="#">Agenda </a>
+		            </li>
+                    <li>
+						<a href="#">Activity </a>
+		            </li>
+		            <li class="dropdown-submenu">
+                        <a class="test" href="#">Contract <span class="caret"></span></a>
+                        <ul class="dropdown-menu" style="margin-left :15px;">
+                          <li><a href="#">Quotation</a></li>
+                          <li><a href="#">Agreement</a></li>
+                        </ul>
+                    </li>
+                    <li>
+						<a href="#">Activation Key </a>
+		            </li>
+		            <li>
+						<a href="#">Prospect Customer </a>
+		            </li>
+                    <li>
+						<a href="#">Customer </a>
+		            </li>
+                    <li>
+						<a href="#">Competitor </a>
+		            </li>
+		            <div class="button">
+				</ul>
+			</li>--%>
+			<li class="dropdown">
+				<a href="" class="dropdown-toggle" data-toggle="dropdown">Configuration<span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity fa fa-cogs "></span></a>
+				<ul class="dropdown-menu forAnimate" role="menu">
+                    <li><a href="iPxCrmProductGrp.aspx">Product Group</a></li>
+                    <li><a href="iPxCrmProduct.aspx">Product</a></li>
+                    <li><a href="iPxCrmCustGrp.aspx">Customer Group</a></li>
+                    <li><a href="iPxCrmCustomer.aspx">Customer</a></li>
+                    <%--<li><a href="iPxCrmProductMenu.aspx">Menu</a></li>--%>
+					<li><a href="iPxCrmhomeuser.aspx">Staff Support</a></li>
+					<li><a href="iPxCrmStaffProductifitas.aspx">Staff Productivity</a></li>
+					<li><a href="iPxCrmSumarryTicket.aspx">Summary Ticket</a></li>
+					<li><a href="iPxReportSetup.aspx">Report</a></li>
+					<li><a href="releasenoteversion.aspx">Release Version</a></li>
+					<li><a href="iPxCrmProffile.aspx">Profile</a></li>
+                    
+				</ul>
+			</li>
+			<li>
+				<a href="iPxReportList.aspx">Report<span style="font-size:16px;" class="pull-right hidden-xs showopacity fa fa-line-chart "></span></a>
+			</li>
+            <li>
+				<%--<a href="../login.aspx">Logout<span style="font-size:16px;" class="pull-right hidden-xs showopacity fa fa-sign-out "></span></a>--%>
+				<asp:LinkButton ID="lbLogoutSid" runat="server">Logout<span style="font-size:16px;" class="pull-right hidden-xs showopacity fa fa-sign-out "></span></asp:LinkButton>
+			</li>
+		</ul>
+	</div>
+</div>
+</nav>
+
+ <div class="" id="page-wrapper">
+      
+                <div class="row">
+                    <div class="col-lg-12">
+                      <div id="content" class="container" >
+                        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </div>
+                   </div>
+                </div>
+                
+                <div id="footer" class="container" >
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+
+                <div class="container">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder3" runat="server"></asp:ContentPlaceHolder>
+                </div>
+     
+</div>
+
+            </ContentTemplate>
+    </asp:UpdatePanel>
+    </form>
+</body>
+</html>
